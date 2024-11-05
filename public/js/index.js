@@ -9,4 +9,13 @@ window.onload = function(){
     scanButton.addEventListener("click", function(){
         scanning();
     })
+
+
+    document.addEventListener("keydown", function(event){
+        if(event.code == "Enter"){
+            var rfidNumber = document.getElementById("rfid_input").value;
+            window.location.href = "/"+rfidNumber;
+        }
+    })
+
 }

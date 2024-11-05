@@ -31,3 +31,7 @@ app.get("/", (req, res) => {
         });
 });
 
+app.get("/:rfid", (req, res) => {
+  console.log(req.params.rfid);
+  res.render("index");
+})
