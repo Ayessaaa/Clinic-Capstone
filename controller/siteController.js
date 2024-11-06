@@ -57,7 +57,19 @@ const visit_done_post = (req, res) => {
     });
 };
 
+const clinic_history = (req, res) =>{
+  Visit.find()
+    .sort({createdAt: -1})
+    .then((result)=>{
+      res.render("clinic-history", {visits: result});
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+}
+
 module.exports = {
   profile,
   visit_done_post,
+  clinic_history
 };

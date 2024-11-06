@@ -31,3 +31,5 @@ app.get("/visit-done/:rfid/:time", (req, res) => {
 app.post("/visit-done/:rfid/:time", siteController.visit_done_post);
 
 app.get("/profile/:rfid", siteController.profile);
+
+app.get("/clinic-history", siteController.clinic_history);
