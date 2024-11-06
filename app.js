@@ -20,9 +20,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
-app.get("/", (req, res) => {
-  res.render("index");
-});
+app.get("/", siteController.home);
 
 app.get("/visit-done/:rfid/:time", (req, res) => {
   res.render("visit-done");
@@ -33,3 +31,8 @@ app.post("/visit-done/:rfid/:time", siteController.visit_done_post);
 app.get("/profile/:rfid", siteController.profile);
 
 app.get("/clinic-history", siteController.clinic_history);
+
+app.get("/clinic-history/details/:id", siteController.clinic_history_details);
+
+
+

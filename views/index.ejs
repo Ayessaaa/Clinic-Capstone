@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MediSync</title>
+    <link rel="stylesheet" href="/css/index.css" />
     <nav>
-        <a href="/">MediSync</a>
+      <a href="/">MediSync</a>
     </nav>
-</head>
-<body>
+  </head>
+  <body>
     <button id="scan_button">Scan</button>
-    
-        <input type="number" name="rfid" id="rfid_input">
-    
-    
+
+    <input type="number" name="rfid" id="rfid_input" />
+
+    <div class="history_div">
+      <h2>VISIT HISTORY</h2>
+      <a href="clinic-history">View Visit History</a>
+
+      <% if (visits.length > 0){ %> <% visits.forEach(visit => { %>
+      <div class="visit_div">
+        <h3><%= visit.name %></h3>
+        <% if(visit.time_start.split(':')[0] > 12){ %> <% var hour =
+        visit.time_start.split(':')[0] - 12 %> <% var am_pm = "PM" %> <% } else
+        { %> <% var hour = visit.time_start.split(':')[0] %> <% var am_pm = "AM"
+        %> <% } %>
+        <h4><%= hour +":"+ visit.time_start.split(':')[1] + " " + am_pm %></h4>
+        <a href="/clinic-history/details/<%= visit._id %>">More Details</a>
+      </div>
+      <% }) %> <% } %>
+    </div>
+
     <script type="text/javascript" src="../js/index.js"></script>
-    
-</body>
+  </body>
 </html>

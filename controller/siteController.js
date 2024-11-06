@@ -1,7 +1,19 @@
+const { render } = require("ejs");
 const User = require("../models/user");
 const Visit = require("../models/visit");
 
 var day = new Date();
+
+const home = (req, res) => {
+  Visit.find()
+    .sort({ createdAt: -1 })
+    .then((result) => {
+      res.render("index", { visits: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 const profile = (req, res) => {
   User.find({ rfid: req.params.rfid })
@@ -57,19 +69,32 @@ const visit_done_post = (req, res) => {
     });
 };
 
-const clinic_history = (req, res) =>{
+const clinic_history = (req, res) => {
   Visit.find()
-    .sort({createdAt: -1})
-    .then((result)=>{
-      res.render("clinic-history", {visits: result});
+    .sort({ createdAt: -1 })
+    .then((result) => {
+      res.render("clinic-history", { visits: result });
     })
-    .catch((err)=>{
+    .catch((err) => {
       console.log(err);
     });
-}
+};
+
+const clinic_history_details = (req, res) => {
+  Visit.find({ _id: req.params.id })
+    .exec()
+    .then((result) => {
+      res.render("history-details", { visits: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 module.exports = {
   profile,
   visit_done_post,
-  clinic_history
+  clinic_history,
+  home,
+  clinic_history_details,
 };
