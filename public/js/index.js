@@ -14,7 +14,7 @@ window.onload = function(){
     document.addEventListener("keydown", function(event){
         if(event.code == "Enter"){
             var rfidNumber = document.getElementById("rfid_input").value;
-            window.location.href = "/"+rfidNumber;
+            window.location.href = "/profile/"+rfidNumber;
         }
     })
 
