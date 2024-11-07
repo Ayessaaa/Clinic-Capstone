@@ -21,14 +21,24 @@
         <h3>Date: <%= visit.date.toLocaleString('en-us',{month:'short', day: 'numeric', year:'numeric'}) %> </h3>
 
         <% if(visit.time_start.split(':')[0] > 12){ %>
-            <% var hour = visit.time_start.split(':')[0] - 12 %>
-            <% var am_pm = "PM" %>
+            <% var hour_start = visit.time_start.split(':')[0] - 12 %>
+            <% var am_pm_start = "PM" %>
         <% } else { %>
-            <% var hour = visit.time_start.split(':')[0] %>
-            <% var am_pm = "AM" %>
+            <% var hour_start = visit.time_start.split(':')[0] %>
+            <% var am_pm_start = "AM" %>
         <% } %>
 
-        <h3>Time: <%= hour +":"+ visit.time_start.split(':')[1] + " " + am_pm %></h3>
+        <% if(visit.time_end.split(':')[0] > 12){ %>
+            <% var hour_end = visit.time_end.split(':')[0] - 12 %>
+            <% var am_pm_end = "PM" %>
+        <% } else { %>
+            <% var hour_end = visit.time_end.split(':')[0] %>
+            <% var am_pm_end = "AM" %>
+        <% } %>
+
+        <h3>Time: <%= hour_start +":"+ visit.time_start.split(':')[1] + " " + am_pm_start %>
+        - <%= hour_end +":"+ visit.time_end.split(':')[1] + " " + am_pm_end %>
+        </h3>
 
     </div>
 
