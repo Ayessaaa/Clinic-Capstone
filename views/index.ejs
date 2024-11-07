@@ -20,11 +20,14 @@
 
       <% if (visits.length > 0){ %> <% visits.forEach(visit => { %>
       <div class="visit_div">
-        <h3><%= visit.name %></h3>
-        <% if(visit.time_start.split(':')[0] > 12){ %> <% var hour =
-        visit.time_start.split(':')[0] - 12 %> <% var am_pm = "PM" %> <% } else
-        { %> <% var hour = visit.time_start.split(':')[0] %> <% var am_pm = "AM"
-        %> <% } %>
+        <h3><%= visit.name %> - <%= visit.reason %></h3>
+        <% if(visit.time_start.split(':')[0] > 12){ %> 
+          <% var hour = visit.time_start.split(':')[0] - 12 %> 
+          <% var am_pm = "PM" %> 
+        <% } else { %> 
+          <% var hour = visit.time_start.split(':')[0] %> 
+          <% var am_pm = "AM" %> 
+        <% } %>
         <h4><%= hour +":"+ visit.time_start.split(':')[1] + " " + am_pm %></h4>
         <a href="/clinic-history/details/<%= visit._id %>">More Details</a>
       </div>

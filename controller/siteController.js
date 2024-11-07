@@ -91,10 +91,29 @@ const clinic_history_details = (req, res) => {
     });
 };
 
+const user_history = (req, res) => {
+  User.find({ rfid: req.params.rfid })
+    .exec()
+    .then((result1) => {
+      Visit.find({ rfid: req.params.rfid })
+        .sort({ createdAt: -1 })
+        .then((result2) => {
+          res.render("user-history", { user: result1[0], visits:  result2});
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
 module.exports = {
   profile,
   visit_done_post,
   clinic_history,
   home,
   clinic_history_details,
+  user_history,
 };
