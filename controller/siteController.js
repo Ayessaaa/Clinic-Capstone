@@ -83,8 +83,15 @@ const clinic_history = (req, res) => {
 const clinic_history_details = (req, res) => {
   Visit.find({ _id: req.params.id })
     .exec()
-    .then((result) => {
-      res.render("history-details", { visits: result });
+    .then((result_visit) => {
+      User.find({ name: result_visit[0].name })
+        .exec()
+        .then((result_user) => {
+          res.render("history-details", { visit: result_visit[0], user: result_user[0] });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);
@@ -94,15 +101,15 @@ const clinic_history_details = (req, res) => {
 const user_history = (req, res) => {
   User.find({ rfid: req.params.rfid })
     .exec()
-    .then((result1) => {
+    .then((result_user) => {
       Visit.find({ rfid: req.params.rfid })
         .sort({ createdAt: -1 })
-        .then((result2) => {
-          res.render("user-history", { user: result1[0], visits:  result2});
+        .then((result_visit) => {
+          res.render("user-history", { user: result_user[0], visits: result_visit });
         })
         .catch((err) => {
-          console.log(err)
-        })
+          console.log(err);
+        });
     })
     .catch((err) => {
       console.log(err);
