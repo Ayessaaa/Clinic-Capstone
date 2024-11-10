@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile: <%= profile_info.name %></title>
+    <link rel="stylesheet" href="/css/profile.css">
     
     <a href="/">MediSync</a>
   </head>
@@ -32,6 +33,19 @@
         <p id="doctors">Doctor/s: <%= profile_info.doctors %></p>
         <p id="doctor_number">Doctors Contact Number: <%= profile_info.doctor_number %></p>
         <p id="health_history">Health History: <%= profile_info.health_history %></p>
+    </div>
+
+    <div class="history_div">
+      <h2>CLINIC HISTORY</h2>
+      <% if (visits.length > 0) { %>
+          <% visits.forEach(visit => { %>
+            <div class="visit_div">
+              <h3><%= visit.reason %></h3>
+              <h4><%= visit.date.toLocaleString('en-us',{month:'short', day: 'numeric', year:'numeric'}) %></h4>
+              <a href="/clinic-history/details/<%= visit._id %>">View Details</a>
+            </div>
+          <% }); %>
+      <% } %>
     </div>
 
     <button id="visit_button">Visit Done</button>

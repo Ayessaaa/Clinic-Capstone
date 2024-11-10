@@ -1,6 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const siteController = require('./controller/siteController')
 
@@ -8,8 +10,11 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-const dbURI =
-  "mongodb+srv://dbUser:abc12345@cliniccluster.jlpr8.mongodb.net/ClinicDB?retryWrites=true&w=majority&appName=ClinicCluster";
+const dbURI = process.env.DB_URI;
+if (!dbURI) {
+  throw new Error('MONGO_URI is not defined in the environment variables')
+}
+
 mongoose
   .connect(dbURI)
   .then((result) => app.listen(3000))
